@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 public class  ActivityDetails extends AppCompatActivity {
 
-    String datatype;
     final Context context = this;
 
     @Override
@@ -23,25 +22,16 @@ public class  ActivityDetails extends AppCompatActivity {
 
         TextView progress_txt = findViewById(R.id.percentage);
         ProgressBar progress_bar = findViewById(R.id.progress_circle);
-        progress_txt.setText(progress_bar.getProgress() + "%");
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+        Integer pos = extras.getInt(MainActivity.POSITION);
+        ActivityItem obj = MainActivity.itemList.get(pos);
 
-        TextView title = findViewById(R.id.add_title);
-        datatype = extras.getString(MainActivity.DATA_TYPE);
-        switch (datatype)
-        {
-            case "FOODREC":
-                title.setText("Food Recommendation");
-                break;
-            case "BLOODGLUCOSE":
-                title.setText("Blood Glucose");
-                break;
-            case "PAIN":
-                title.setText("Pain");
-                break;
-        }
+        // Show all items
+        progress_bar.setProgress(obj.m_progress);
+        progress_txt.setText(progress_bar.getProgress() + "%");
+
 
         Button back = findViewById(R.id.back_btn);
         back.setOnClickListener(new View.OnClickListener() {

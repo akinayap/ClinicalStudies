@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 
 public class ActivityTabs extends AppCompatActivity {
@@ -47,6 +48,35 @@ public class ActivityTabs extends AppCompatActivity {
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+
+        Button back = findViewById(R.id.back_btn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityTabs.super.finish();
+            }
+        });
+
+        Button join = findViewById(R.id.join_btn);
+
+        join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Add activity to list
+                String title = findViewById(R.id.activity_title).toString();
+                String subtext =  findViewById(R.id.desc_subtext).toString();
+                String contactName = findViewById(R.id.contact_name).toString();
+                String contactNumber = findViewById(R.id.contact_number).toString();
+
+                MainActivity.itemList.add(new ActivityItem(title, subtext, contactName, contactNumber));
+
+                // Refresh RecyclerView
+                MainActivity.adapter.notifyDataSetChanged();
+                ActivityTabs.super.finish();
+
             }
         });
 

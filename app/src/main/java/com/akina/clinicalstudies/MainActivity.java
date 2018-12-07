@@ -3,21 +3,19 @@ package com.akina.clinicalstudies;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    public enum Datatype {
-        FOODREC,
-        BLOODGLUCOSE,
-        PAIN
-    }
+public class MainActivity extends AppCompatActivity implements RVAdapter.ItemClickListener {
 
-    public static final String DATA_TYPE = "NONE";
-
-    RelativeLayout frBtn, bgBtn, pBtn;
+    public static final String POSITION = "Position";
+    static RVAdapter adapter;
+    public static ArrayList<ActivityItem> itemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,30 +30,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        frBtn = findViewById(R.id.food_rec_btn);
-        bgBtn = findViewById(R.id.blood_glucose_btn);
-        pBtn = findViewById(R.id.pain_btn);
+        RecyclerView recyclerView = findViewById(R.id.rvElems);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        frBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showData(Datatype.FOODREC);
-            }
-        });
-
-        bgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showData(Datatype.BLOODGLUCOSE);
-            }
-        });
-
-        pBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showData(Datatype.PAIN);
-            }
-        });
+        adapter = new RVAdapter(this, itemList);
+        adapter.setClickListener(this);
+        recyclerView.setAdapter(adapter);
     }
 
     public void goToTabView()
@@ -64,14 +44,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showData(Datatype type)
-    {
-        Intent intent = new Intent(this, ActivityDetails.class);
+    @Override
+    public void onItemClick(View view, int position) {
 
+        // Go to next activity depending on type
+        Intent intent = new Intent(this, ActivityDetails.class);
         Bundle extras = new Bundle();
-        extras.putString(DATA_TYPE, type.name());
-        Log.e("type", type.name());
+
+        extras.putInt(POSITION, position);
         intent.putExtras(extras);
         startActivity(intent);
     }
+
 }

@@ -28,6 +28,7 @@
         android:layout_marginBottom="8dp"
         android:text="TextView"
         android:textSize="18sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/TitleBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/TitleBar"
@@ -204,11 +205,14 @@
 
             <TextView
                 android:id="@+id/subtext"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:text="Anyone who have hyperthyroidism and thyroid cancer and would benefit from using a smart app for low-iodine food recommendation. The main aim is to have a low-iodine diet so as to reduce thyroid hormones. "
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
