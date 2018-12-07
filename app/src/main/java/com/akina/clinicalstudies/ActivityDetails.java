@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActivityDetails extends AppCompatActivity {
+public class  ActivityDetails extends AppCompatActivity {
 
     String datatype;
     final Context context = this;

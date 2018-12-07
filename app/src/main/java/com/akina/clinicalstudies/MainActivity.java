@@ -18,10 +18,19 @@ public class MainActivity extends AppCompatActivity {
     public static final String DATA_TYPE = "NONE";
 
     RelativeLayout frBtn, bgBtn, pBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RelativeLayout scanQRBtn = findViewById(R.id.scan_qr_btn);
+        scanQRBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToTabView();
+            }
+        });
 
         frBtn = findViewById(R.id.food_rec_btn);
         bgBtn = findViewById(R.id.blood_glucose_btn);
@@ -47,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 showData(Datatype.PAIN);
             }
         });
+    }
+
+    public void goToTabView()
+    {
+        Intent intent = new Intent(this, ActivityTabs.class);
+        startActivity(intent);
     }
 
     public void showData(Datatype type)
