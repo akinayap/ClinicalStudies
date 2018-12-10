@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.TextView;
 
 public class ActivityTabs extends AppCompatActivity {
     ConstraintLayout desc, eligibility, contact;
@@ -66,10 +67,10 @@ public class ActivityTabs extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Add activity to list
-                String title = findViewById(R.id.activity_title).toString();
-                String subtext =  findViewById(R.id.desc_subtext).toString();
-                String contactName = findViewById(R.id.contact_name).toString();
-                String contactNumber = findViewById(R.id.contact_number).toString();
+                String title = ((TextView)findViewById(R.id.activity_title)).getText().toString();
+                String subtext =  ((TextView)findViewById(R.id.desc_subtext)).getText().toString();
+                String contactName = ((TextView)findViewById(R.id.contact_name)).getText().toString();
+                String contactNumber = ((TextView)findViewById(R.id.contact_number)).getText().toString();
 
                 MainActivity.itemList.add(new ActivityItem(title, subtext, contactName, contactNumber));
 

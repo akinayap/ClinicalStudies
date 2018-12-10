@@ -11,6 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class  ActivityDetails extends AppCompatActivity {
 
     final Context context = this;
@@ -31,6 +35,20 @@ public class  ActivityDetails extends AppCompatActivity {
         // Show all items
         progress_bar.setProgress(obj.m_progress);
         progress_txt.setText(progress_bar.getProgress() + "%");
+
+        TextView startEnd = findViewById(R.id.start_end_date);
+        DateFormat dateFormat = new SimpleDateFormat("d MMMM YYYY", Locale.ENGLISH);
+
+        startEnd.setText("Started on " + dateFormat.format(obj.m_startTime.getTimeInMillis()) +
+                        "\nEnd on " + dateFormat.format(obj.m_endTime.getTimeInMillis()));
+
+        TextView title = findViewById(R.id.activity_title);
+        title.setText(obj.m_title);
+
+        TextView subtext = findViewById(R.id.subtext);
+        subtext.setText(obj.m_subtext);
+
+
 
 
         Button back = findViewById(R.id.back_btn);

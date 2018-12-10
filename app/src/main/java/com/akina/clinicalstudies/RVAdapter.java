@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -39,19 +40,22 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>  {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ActivityItem elem = m_data.get(position);
-        //holder.myTitle.setText(elem.m_title);
+        holder.myTitle.setText(elem.m_title);
         DateFormat dateFormat = new SimpleDateFormat("d MMM YYYY", Locale.ENGLISH);
 
         switch(elem.m_status)
         {
             case PENDING:
                 holder.myStartDate.setText("Pending on " + dateFormat.format(elem.m_startTime.getTimeInMillis()));
+                holder.myObj.setBackgroundColor(Color.parseColor("#ffb62d"));
                 break;
             case ACCEPTED:
                 holder.myStartDate.setText("Accepted on " + dateFormat.format(elem.m_startTime.getTimeInMillis()));
+                holder.myObj.setBackgroundColor(Color.parseColor("#29eadc"));
                 break;
             case COMPLETE:
                 holder.myStartDate.setText("Complete on " + dateFormat.format(elem.m_startTime.getTimeInMillis()));
+                holder.myObj.setBackgroundColor(Color.parseColor("#f3465a"));
                 break;
         }
     }
@@ -65,11 +69,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>  {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView myTitle;
         TextView myStartDate;
+        RelativeLayout myObj;
 
         ViewHolder(View itemView) {
             super(itemView);
             myTitle = itemView.findViewById(R.id.title_txt);
             myStartDate = itemView.findViewById(R.id.date_txt);
+            myObj = itemView.findViewById(R.id.obj);
             itemView.setOnClickListener(this);
         }
 
